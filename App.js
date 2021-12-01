@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import PokeProvider from './context/PokeContext';
-import BottomTabNavigator1 from './Navigations/BottomTabNavigation1';
+import BottomTabNavigator1 from './Navigations/BottomTabNavigator1';
 import {NavigationContainer} from '@react-navigation/native';
 
 

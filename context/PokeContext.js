@@ -13,13 +13,13 @@ const PokeProvider = (props)=>{
             let url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
             const res= await fetch (url);
             const data = await res.json()
+            Alert.alert('Se encontro al pokemon')
             return data;
             
         }catch(e){
             console.log(e);
             Alert.alert('No se encontro al pokemon')
         }
-        
     }
     /*
     useEffect(()=>{

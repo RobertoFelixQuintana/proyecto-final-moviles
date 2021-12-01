@@ -1,37 +1,36 @@
-import React, {useContext,useState} from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import React, {useContext,useState,useEffect} from 'react';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {PokeContext} from '../context/PokeContext';
 
 export default function HomeScreen() {
     const {searchPokemon,allPokemons} = useContext(PokeContext);
-    
-    const [search,setSearch]=useState('');
+    const [search,setSearch]=useState("");
 
-    const onChange =(e)=>{
-        const temporal = e.target.value;
-        setSearch(temporal.toLowerCase());
+    const onChange =(palabra)=>{
+        let temporal = palabra.toLowerCase();
+        setSearch(temporal);
     }
-    const onClick = async (e) =>{
+    const onClick = async () =>{
         const data= await searchPokemon(search);
-        console.log(data);
+        
     }
-    return (
 
-                <SafeAreaView>
-                    <TextInput
-                    style={styles.input}
-                    onChange={onChange}
-                    maxLength={40}
-                    placeholder="busca pokemon"
-                    />
-                
-                    <Text>{search}</Text>
-                    <Button
-                    onPress={onClick}
-                    title="Buscar"
-                    />
-                </SafeAreaView>
+    return (
+        <SafeAreaView>
+            <TextInput
+            style={styles.input}
+            onChangeText={(text)=>{onChange(text)}}
+            maxLength={40}
+            placeholder="Buscar pokemon"
+            />
+            
+            <Button
+            onPress={onClick}
+            title="Buscar"
+            />
+            <Text>Busqueda: {search}</Text>
+        </SafeAreaView>
     )
 }
 
@@ -41,11 +40,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'gray',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    containerInput:{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
     },
     input: {
         minWidth:90,
