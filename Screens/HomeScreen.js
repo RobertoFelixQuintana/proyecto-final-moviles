@@ -1,26 +1,27 @@
 import React, {useContext,useState,useEffect} from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ScrollView, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Header, Card} from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {PokeContext} from '../context/PokeContext';
 
 export default function HomeScreen() {
-    const {searchPokemon,setPokemon,pokemon,pokemonEncontrado} = useContext(PokeContext);
-    
+    const {searchPokemon,pokemon,pokemonEncontrado} = useContext(PokeContext);
     const [search,setSearch]=useState("");
 
     const onChange =(palabra)=>{
         let temporal = palabra.toLowerCase();
         setSearch(temporal);
     }
-    const onClick = async () =>{
-        const data= await searchPokemon(search);
-        setPokemon(data);
+    const onClick = () =>{
+        searchPokemon(search);
     }
 
     return (
-        <SafeAreaView style={{flex:1, alignItems:'center',justifyContent:'center'}}>
-    
+        <ScrollView>
+            <Header
+                centerComponent={{ text: 'Buscar Pokemon', style: { color: '#fff'}}}
+                containerStyle={{borderBottomColor:'black',borderBottomWidth: 2 }}
+            />
             <View style={styles.containerButton}>
                 <TextInput
                 style={styles.input}
@@ -33,30 +34,49 @@ export default function HomeScreen() {
                 title="Buscar"
                 />
             </View>
-            {pokemonEncontrado==true ?
+            {pokemonEncontrado==true && pokemon.nombre !== undefined ?
                 
-                <View>
+                <View style={styles.containerStats}>
                     <Card key="1" containerStyle={{width:"90%", marginBottom:5}}>
-                     <Card.Title>{pokemon.name}</Card.Title>
+                     <Card.Title style={{textTransform:'capitalize'}}>{pokemon.nombre}</Card.Title>
                      <Card.Divider/>
                      <Card.Image source={{
-                        uri: pokemon.sprites?.front_default
+                        uri: pokemon.img
                      }}
                      resizeMode="contain"
                      />
-                     <Text style={{marginTop: 5}}>
-                            Peso: {pokemon.weight}
-                       </Text>
+                    <View style={styles.containerStats}>
+                        <Text style={styles.marginText}>
+                            Peso: {pokemon.peso}
+                        </Text>
+                        <Text style={{textTransform:'capitalize'}}>
+                            Tipo: {pokemon.tipo}
+                        </Text>
+                        <Text style={styles.marginText}>
+                            Exp: {pokemon.experiencia}
+                        </Text>
+                    </View>
+                    <View style={styles.containerStats}>
+                        <Text style={styles.marginText}>
+                            Ataque: {pokemon.ataque}
+                        </Text>
+                        <Text style={styles.marginText}>
+                            Defensa: {pokemon.defensa}
+                        </Text>
+                        <Text style={styles.marginText}>
+                            Especial: {pokemon.especial}
+                        </Text>
+                    </View>
                     </Card>
                 </View>
-
+    
                 :
                 <View>
                     <Text>No se ha encontrado al pokemon</Text>
                 </View>
                 
             }
-        </SafeAreaView>
+        </ScrollView>
     )
 }
 
@@ -67,16 +87,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    containerButton:{
+    containerStats: {
+        flex: 1,
         flexDirection:'row',
         alignItems: 'center',
         justifyContent: 'center',
     },
+    containerButton:{
+        flex:1,
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    marginText:{
+        margin:5,
+        textAlign:'center'
+    },
     input: {
         minWidth:80,
         height: 40,
-        margin: 12,
+        margin: 10,
         borderWidth: 1,
-        padding: 10,
+        padding: 5,
       },
   });
