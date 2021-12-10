@@ -69,8 +69,8 @@ export default function BottomTabNavigator1(){
                     )
                 }}
             />
-
             
+             
         </Tab.Navigator>
     )
 }
