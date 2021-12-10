@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     },
     containerButton:{
         flex:1,
-        flexDirection:'row',
+        flexDirection:'column',
         alignItems: 'center',
         justifyContent: 'center',
     },
