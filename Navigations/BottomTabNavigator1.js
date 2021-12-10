@@ -1,9 +1,10 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../Screens/HomeScreen';
+import HomeScreen from '../Navigations/StackNavigation1';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TopTabNavigator1 from './TopTabNavitagor1';
 import TopPokemonesScreen from '../Screens/TopPokemonsScreens';
+import PokeballsScreen from '../Screens/PokeballsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,6 +45,16 @@ export default function BottomTabNavigator1(){
                      tabBarLabel:"Top Pokemones",
                      tabBarIcon:()=>(
                          <Ionicons name={"flame"} size={20} color="red"/>
+                     )
+                }}
+            />
+            <Tab.Screen
+                 name="Pokeballs"
+                 component={PokeballsScreen}
+                 options={{
+                     tabBarLabel:"Pokeballs",
+                     tabBarIcon:()=>(
+                         <Ionicons name={"disc"} size={20} color="red"/>
                      )
                 }}
             />

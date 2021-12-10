@@ -1,20 +1,16 @@
 import React, {useContext,useState} from 'react';
 import { StyleSheet, View, ScrollView,Text } from 'react-native'
-import { Header, Card, Image, Button} from 'react-native-elements';
+import { Card, Image, Button} from 'react-native-elements';
 import {PokeContext} from '../context/PokeContext';
 
-export default function TopPokemonsScreen() {
-    const {topPokemons}= useContext(PokeContext);
-    
+
+export default function EvolutionsScreen() {
+    const {evolutions}= useContext(PokeContext);
    
     return (
         <ScrollView>
-            <Header
-                centerComponent={{ text: 'Top 10 Pokemones', style: { color: '#fff'}}}
-                containerStyle={{borderBottomColor:'black',borderBottomWidth: 2 }}
-            />
             <View style={styles.container}>
-            {topPokemons.map((e,i)=>{
+            {evolutions.map((e,i)=>{
 
                 return(
                     <Card key={i} containerStyle={{width:"90%", marginBottom:5}}>

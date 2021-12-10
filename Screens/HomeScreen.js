@@ -1,10 +1,9 @@
 import React, {useContext,useState,useEffect} from 'react';
-import { ScrollView, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { ScrollView, Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import { Header, Card} from 'react-native-elements';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import {PokeContext} from '../context/PokeContext';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
     const {searchPokemon,pokemon,pokemonEncontrado} = useContext(PokeContext);
     const [search,setSearch]=useState("");
 
@@ -33,6 +32,28 @@ export default function HomeScreen() {
                 onPress={onClick}
                 title="Buscar"
                 />
+                <Button
+                    onPress={()=>navigation.navigate('LocationsScreens')}
+                    title="Locations"
+                />
+                <Button
+                    onPress={()=>navigation.navigate('MachineScreen')}
+                    title="Machine"
+                />
+                {pokemonEncontrado==true?
+                    <Button
+                    disabled={false}
+                    onPress={()=>navigation.navigate('EvolutionsScreen')}
+                    title="Ir a evoluciones"
+                    />
+                :
+                    <Button
+                    disabled={true}
+                    onPress={()=>navigation.navigate('EvolutionsScreen')}
+                    title="Ir a evoluciones"
+                    />
+                }
+
             </View>
             {pokemonEncontrado==true && pokemon.nombre !== undefined ?
                 
